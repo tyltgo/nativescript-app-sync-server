@@ -5,9 +5,8 @@ services:
     build: .
     command: pm2 start --no-daemon process.json
     ports:
-      - "3030:3000"
+      - "3000:3000"
     volumes:
-      - .:/app
       - data-storage:/data/storage
       - data-tmp:/data/tmp
     environment:
