@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  server:
+    build: .
+    command: pm2 start --no-daemon process.json
+    ports:
+      - "3030:3000"
+    volumes:
+      - .:/app
+      - data-storage:/data/storage
+      - data-tmp:/data/tmp
+    environment:
+      REDIS_URL: redis:6379
+      RDS_HOST: mysql
+      STORAGE_DIR: "/data/storage"
+      DATA_DIR: "/data/tmp"
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - mysql
+
+  redis:
+    image: redis
+    volumes:
+      - data-redis:/data
+
+  mysql:
+    image: mysql:5.7.23
+    volumes:
+      - data-mysql:/var/lib/mysql
+    env_file:
+      - ./.env
+volumes:
+  data-storage:
+  data-tmp:
+  data-mysql:
+  data-redis:
+
