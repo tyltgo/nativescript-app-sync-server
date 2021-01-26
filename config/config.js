@@ -70,7 +70,7 @@ config.development = {
     tryLoginTimes: 3,
     // CodePush Web(https://github.com/lisong/code-push-web) login address.
     // codePushWebUrl: "http://127.0.0.1:3001",
-    codePushWebUrl: "https://appsync.nativescript.org",
+    codePushWebUrl: process.env.CODEPUSH_WEB_URL || "https://appsync.nativescript.org",
     // create patch updates's number. default value is 3
     diffNums: 3,
     // data dir for caclulate diff files. it's optimization.
